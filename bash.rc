@@ -1,0 +1,16 @@
+export PS1="[\u@\h]\[\033[1;31m\][\$(parse_git_branch)]\[\033[0;32m\][\$(parse_git_repo)]\[\033[0m\][\w]>"
+
+function parse_git_repo() {
+dirname=`git rev-parse --show-toplevel 2> /dev/null`
+export GIT_REPO=`basename $dirname 2> /dev/null`
+echo $GIT_REPO
+}
+
+function parse_git_branch() {
+local GIT_BRANCH=`git symbolic-ref --short HEAD 2> /dev/null`
+echo $GIT_BRANCH
+}
+
+export NVM_DIR="$HOME/.nvm"
+[ -s "$NVM_DIR/nvm.sh" ] && \. "$NVM_DIR/nvm.sh"  # This loads nvm
+[ -s "$NVM_DIR/bash_completion" ] && \. "$NVM_DIR/bash_completion"  # This loads nvm bash_completion
